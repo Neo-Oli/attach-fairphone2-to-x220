@@ -7,12 +7,12 @@ function main () {
     t=1.6;
     b=12; //cutout border
     v=7;
-    gap=5;
+    gap=6;
     hg=0-gap/2;
     usbv=9;
     cliph=30;
     clipd=2;
-    r=2;
+    r=3;
     fn=20;
     entryh=5;
     clipupper=11.7;
