@@ -15,8 +15,11 @@ function main () {
     r=2;
     fn=20;
     entryh=5;
-    clipupper=11.4;
-    cliplip=2;
+    clipupper=11.7;
+    cliplip=3;
+    //debug settings
+    //cliph=5;
+    //w=20;
     container=union(
         difference(
             difference(
@@ -117,35 +120,29 @@ function main () {
         .rotateZ(90)
         .translate([h+t+(t/2),t,t+entryh]));
         clip=union(
-            cube({
-                size: [
-                    cliph,
-                    w+t*2,
-                    clipd
-            ]}),
             cylinder({
                 r:clipd/2,
                 h:w+t*2
-            })
+            }).scale([4,1,1])
             .rotateX(-90)
-            .translate([0,0,(clipd/2)]),
+            .translate([clipd/2+3,0,(clipd/2)]),
             cylinder({
                 r:clipd/2,
                 h:w+t*2
-            })
+            }).scale([4,1,1])
             .rotateX(-90)
-            .translate([cliph,0,(clipd/2)]),
+            .translate([cliph-(clipd/2)-3,0,(clipd/2)]),
             cube({
                 size: [
                     cliph,
                     clipd,
-                    clipupper+(clipd/2)
-            ]}).translate([0,0,clipd]),
+                    clipupper+clipd
+            ]}).translate([0,0,clipd/2]),
             //cliplip
             cube({
                 size: [
                     cliph,
-                    cliplip+0.5+(clipd/2),
+                    cliplip+0.7+(clipd/2),
                     clipd
             ]}).translate([0,clipd/2,clipupper+clipd]),
             cylinder({
@@ -157,12 +154,12 @@ function main () {
             cube({
                 size: [
                     cliph,
-                    7.38,
+                    6.68,
                     clipd
                 ],
             })
             .translate([0,-0.5,0])
-            .rotateX(-29.6)
+            .rotateX(-35.6)
             .translate([0,cliplip+clipd,clipupper+clipd]),
             cube({
                 size: [
@@ -181,6 +178,9 @@ function main () {
         .translate([(h+t*2)/2-(cliph/2),0,d+t]);
         return center(
             [true, true, false],
-            union(container,clip)
+            union(
+                container,
+                clip
+            )
         );
 }
