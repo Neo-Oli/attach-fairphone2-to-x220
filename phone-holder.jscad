@@ -1,41 +1,55 @@
+// vim: set syntax=javascript:
+
 function main () {
     h=145.5;
     w=77.5;
     d=15;
-    t=1.5;
-    b=12;
+    t=1.6;
+    b=12; //cutout border
     v=7;
     gap=5;
     hg=0-gap/2
     usbv=9;
     cliph=30;
     clipd=2;
-    r=1;
+    r=2;
+    fn=20;
     clipupper=11.4;
     return center(
         [true, true, false],
         union(
+            difference(
             difference(
                 cube({
                     size: [
                         h+t*2,
                         w+t*2,
                         d+t+clipd
-                    ]}),
+                    ],
+                    round:true,
+                    fn:fn,
+                    radius:r
+                    }),
                 cube({
                     size: [
                         h,
                         w,
-                        d+clipd
-                    ]}).translate([t,t,t]),
+                        d+clipd+r
+                    ],
+                    round:true,
+                    radius:r,
+                    fn:fn
+                    }).translate([t,t,t])
+                ),
                 // cutout bottom
                 cube({
                     size: [
                         h-(b*2),
-                        w,
+                        w-r,
                         gap
                     ],
                     round:true,
+                    fn:fn,
                     radius:r
                 }).translate([t+b,t,hg]),
                 //Camera button
@@ -46,6 +60,7 @@ function main () {
                         v
                     ],
                     round:true,
+                    fn:fn,
                     radius:r
                 }).translate([40,w+t+hg,(t+d)/2-(v/2)]),
                 //power button
@@ -56,6 +71,7 @@ function main () {
                         v
                     ],
                     round:true,
+                    fn:fn,
                     radius:r
                 }).translate([115,w+t+hg,(t+d)/2-(v/2)]),
                 //volume keys
@@ -66,6 +82,7 @@ function main () {
                         v
                     ],
                     round:true,
+                    fn:fn,
                     radius:r
                 }).translate([80,hg,(t+d)/2-(v/2)]),
                 //usb
@@ -76,6 +93,7 @@ function main () {
                         usbv
                     ],
                     round: true,
+                    fn:fn,
                     radius: r
                 }).translate([hg,w*0.5-15,(t+d)/2-(usbv/2)]),
                 //entry
@@ -86,6 +104,7 @@ function main () {
                         d
                     ],
                     round:true,
+                    fn:fn,
                     radius:r
                 }).translate([h+t+hg,t,t+5])
             ),
