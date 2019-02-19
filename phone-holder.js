@@ -14,7 +14,9 @@ function main () {
     clipd=2;
     r=2;
     fn=20;
+    entryh=5;
     clipupper=11.4;
+    cliplip=2;
     return center(
         [true, true, false],
         union(
@@ -106,8 +108,16 @@ function main () {
                     round:true,
                     fn:fn,
                     radius:r
-                }).translate([h+t+hg,t,t+5])
+                }).translate([h+t+hg,t,t+entryh-(t/2)])
             ),
+            //entry rounding
+                cylinder({
+                    r:t/2,
+                    h:w
+                })
+                .rotateY(90)
+                .rotateZ(90)
+                .translate([h+t+(t/2),t,t+entryh]),
             //clip
             union(
                 cube({
@@ -134,26 +144,33 @@ function main () {
                         clipd,
                         clipupper
                     ]}).translate([0,0,clipd]),
-                difference(
+                cube({
+                    size: [
+                        cliph,
+                        cliplip+clipd+0.5,
+                        clipd
+                    ]}).translate([0,0,clipupper+clipd]),
+                //difference(
                     cube({
                         size: [
                             cliph,
-                            10.5622,
+                            7.38,
                             clipd
                         ],
                     })
-                    .rotateX(-18.7)
-                    .translate([0,0,clipupper+clipd]),
-                    cube({
-                        size: [
-                            cliph,
-                            10.5622,
-                            clipd
-                        ],
-                    })
-                    .rotateX(25)
-                    .translate([0,0,clipupper+clipd+(clipd/3)])
-                ),
+                    .translate([0,-0.5,0])
+                    .rotateX(-29.6)
+                    .translate([0,cliplip+clipd,clipupper+clipd]),
+                    //cube({
+                        //size: [
+                            //cliph,
+                            //10.5622,
+                            //clipd
+                        //],
+                    //})
+                    //.rotateX(25)
+                    //.translate([0,0,clipupper+clipd+(clipd/3)])
+                //),
                 cube({
                     size: [
                         cliph,
