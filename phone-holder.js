@@ -136,8 +136,8 @@ function main () {
                 size: [
                     cliph,
                     clipd,
-                    clipupper+clipd
-            ]}).translate([0,0,clipd/2]),
+                    clipupper+clipd+t
+            ]}).translate([0,0,(clipd/2)-t]),
             //cliplip
             cube({
                 size: [
@@ -176,11 +176,42 @@ function main () {
 
         )
         .translate([(h+t*2)/2-(cliph/2),0,d+t]);
+
+        stabilizer=union(
+            cube({
+                size: [
+                    cliph,
+                    clipd,
+                    clipd+8+clipd
+            ]}).translate([0,0,(clipd/2)-t]),
+            cylinder({
+                r:clipd/2,
+                h:cliph
+            })
+            .rotateY(90)
+            .translate([0,clipd/2,clipd+8+(clipd/2)]),
+            cube({
+                size: [
+                    cliph,
+                    10,
+                    clipd
+            ]}).translate([0,clipd/2,clipd+8]),
+            cylinder({
+                r:clipd/2,
+                h:cliph
+            })
+            .rotateY(90)
+            .translate([0,10,clipd+8+(clipd/2)])
+
+        )
+        .rotateZ(-90)
+        .translate([0,(w+t*2)-t,d+t]);
         return center(
             [true, true, false],
             union(
                 container,
-                clip
+                clip,
+                stabilizer
             )
         );
 }
