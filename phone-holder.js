@@ -1,9 +1,9 @@
 // vim: set syntax=javascript:
 
 function main () {
-    h=145.5;
-    w=77.5;
-    d=15;
+    h=145.5; //height
+    w=77.4; //width
+    d=14.5;
     t=1.6;
     b=12; //cutout border
     v=7;
